@@ -92,7 +92,6 @@
     background-size: cover; /* keeps full image */
     background-position: center top;
     background-repeat: no-repeat;
-    background-color: black;
     display: flex;
     align-items: center; /* ⬅ centers vertically */
     justify-content: flex-start;
@@ -100,7 +99,6 @@
   }
 
   .overlay {
-    background-color: rgba(0, 0, 0, 0.55);
     display: flex;
     align-items: center; /* ⬅ also centers overlay */
     justify-content: flex-start;

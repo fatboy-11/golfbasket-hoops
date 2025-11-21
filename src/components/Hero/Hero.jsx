@@ -22,7 +22,7 @@ const Hero = () => {
         </p>
         <button className="cta">
           <img src={cart} alt="cart icon" className="cart-icon" />
-          Pre-Order Now
+          Get More detail
         </button>
       </div>
     </section>
