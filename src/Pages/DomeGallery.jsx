@@ -1,60 +1,15 @@
 import { useEffect, useMemo, useRef, useCallback } from 'react';
 import { useGesture } from '@use-gesture/react';
 import '../components/Gallery/Gallery.css'; // Make sure this path is correct
+const importImages = import.meta.glob('../../assets/gallery/*.{jpeg,png}', {
+  eager: true,
+});
 
-const localImages = [
-  // JPEG images (img1–img35)
-{ src: '../../assets/gallery/img1.jpeg', alt: 'Golf basket image 1' },
-{ src: '../../assets/gallery/img2.jpeg', alt: 'Golf basket image 2' },
-{ src: '../../assets/gallery/img3.jpeg', alt: 'Golf basket image 3' },
-{ src: '../../assets/gallery/img4.jpeg', alt: 'Golf basket image 4' },
-{ src: '../../assets/gallery/img5.jpeg', alt: 'Golf basket image 5' },
-{ src: '../../assets/gallery/img6.jpeg', alt: 'Golf basket image 6' },
-{ src: '../../assets/gallery/img7.jpeg', alt: 'Golf basket image 7' },
-{ src: '../../assets/gallery/img8.jpeg', alt: 'Golf basket image 8' },
-{ src: '../../assets/gallery/img9.jpeg', alt: 'Golf basket image 9' },
-{ src: '../../assets/gallery/img10.jpeg', alt: 'Golf basket image 10' },
-{ src: '../../assets/gallery/img11.jpeg', alt: 'Golf basket image 11' },
-{ src: '../../assets/gallery/img12.jpeg', alt: 'Golf basket image 12' },
-{ src: '../../assets/gallery/img13.jpeg', alt: 'Golf basket image 13' },
-{ src: '../../assets/gallery/img14.jpeg', alt: 'Golf basket image 14' },
-{ src: '../../assets/gallery/img15.jpeg', alt: 'Golf basket image 15' },
-{ src: '../../assets/gallery/img16.jpeg', alt: 'Golf basket image 16' },
-{ src: '../../assets/gallery/img17.jpeg', alt: 'Golf basket image 17' },
-{ src: '../../assets/gallery/img18.jpeg', alt: 'Golf basket image 18' },
-{ src: '../../assets/gallery/img19.jpeg', alt: 'Golf basket image 19' },
-{ src: '../../assets/gallery/img20.jpeg', alt: 'Golf basket image 20' },
-{ src: '../../assets/gallery/img21.jpeg', alt: 'Golf basket image 21' },
-{ src: '../../assets/gallery/img22.jpeg', alt: 'Golf basket image 22' },
-{ src: '../../assets/gallery/img23.jpeg', alt: 'Golf basket image 23' },
-{ src: '../../assets/gallery/img24.jpeg', alt: 'Golf basket image 24' },
-{ src: '../../assets/gallery/img25.jpeg', alt: 'Golf basket image 25' },
-{ src: '../../assets/gallery/img26.jpeg', alt: 'Golf basket image 26' },
-{ src: '../../assets/gallery/img27.jpeg', alt: 'Golf basket image 27' },
-{ src: '../../assets/gallery/img28.jpeg', alt: 'Golf basket image 28' },
-{ src: '../../assets/gallery/img29.jpeg', alt: 'Golf basket image 29' },
-{ src: '../../assets/gallery/img30.jpeg', alt: 'Golf basket image 30' },
-{ src: '../../assets/gallery/img31.jpeg', alt: 'Golf basket image 31' },
-{ src: '../../assets/gallery/img32.jpeg', alt: 'Golf basket image 32' },
-{ src: '../../assets/gallery/img33.jpeg', alt: 'Golf basket image 33' },
-{ src: '../../assets/gallery/img34.jpeg', alt: 'Golf basket image 34' },
-{ src: '../../assets/gallery/img35.jpeg', alt: 'Golf basket image 35' },
+const localImages = Object.keys(importImages).map((path, index) => ({
+  src: importImages[path].default,
+  alt: `Golf basket image ${index + 1}`,
+}));
 
-// PNG images (img36–img45)
-{ src: '../../assets/gallery/img36.png', alt: 'Golf basket image 36' },
-{ src: '../../assets/gallery/img37.png', alt: 'Golf basket image 37' },
-{ src: '../../assets/gallery/img38.png', alt: 'Golf basket image 38' },
-{ src: '../../assets/gallery/img39.png', alt: 'Golf basket image 39' },
-{ src: '../../assets/gallery/img40.png', alt: 'Golf basket image 40' },
-{ src: '../../assets/gallery/img41.png', alt: 'Golf basket image 41' },
-{ src: '../../assets/gallery/img42.png', alt: 'Golf basket image 42' },
-{ src: '../../assets/gallery/img43.png', alt: 'Golf basket image 43' },
-{ src: '../../assets/gallery/img44.png', alt: 'Golf basket image 44' },
-{ src: '../../assets/gallery/img45.png', alt: 'Golf basket image 45' },
-
-    
-
-];
 // ===== CONFIGURABLE SEGMENT PARAMETERS =====
 const SEGMENT_CONFIG = {
   // Number of segments around the sphere (affects density of items)
