@@ -1,6 +1,6 @@
 import React from "react";
 import "./OurStory.css";
-import ourStoryVideo from "../../assets/videos/ourstory.mp4"; // replace path if needed
+
 import backgroundPattern from "../../assets/flame-pattern.png"; // your flame/fireball image
 
 const OurStory = () => {
@@ -30,12 +30,12 @@ const OurStory = () => {
 
           <div className="story-video">
             <video
-              src={ourStoryVideo}
+              src="/videos/ourstory.mp4"
               autoPlay
               loop
               muted
               playsInline
-              className="video-element"
+              className="ourstory-video"
             />
           </div>
         </div>
